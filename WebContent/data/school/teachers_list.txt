@@ -1,0 +1,6 @@
+﻿MaGV|TenGV|MaHP|TenHP
+GV0001|Hoàng Văn A|HP0001|Hóa đại cương
+GV0001|Hoàng Văn A|HP0002|Kinh tế ngành
+GV0002|Đỗ Văn B|HP0002|Kinh tế ngành
+GV0003|Trần Thị C|HP0003|Giải tích 1
+GV0004|Nguyễn Thị D|HP0004|Giải tích 2
