@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+
 import manager.Constants;
 import model.bean.Student;
 import model.bean.Unit;
@@ -41,7 +43,8 @@ public class ProcessAdminAction extends HttpServlet {
 
 		if (action.equals("create")) {
 			for (Unit unit : UnitBO.getAllUnits()) {
-				File file = new File(Constants.DIRECTORY_UNITS+"\\" + unit.getId());
+				File file = new File(Constants.DIRECTORY_UNITS + "\\"
+						+ unit.getId());
 				if (!file.exists()) {
 					file.mkdirs();
 				}
@@ -58,15 +61,30 @@ public class ProcessAdminAction extends HttpServlet {
 			}
 
 			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Ghi th�ng tin th�nh c�ng');");
+			out.println("alert('Ghi thông tin thành công');");
 			out.println("</script>");
-			
+
 			RequestDispatcher rd = request
 					.getRequestDispatcher("/ShowAdminAction");
 			rd.include(request, response);
 
 		} else if (action.equals("delete")) {
+			String message = "Xóa dữ liệu thành công";
+			try {
+				FileUtils.cleanDirectory(new File(Constants.DIRECTORY_UNITS));
+				FileUtils.cleanDirectory(new File(Constants.DIRECTORY_IMAGES));
+			} catch (Exception e) {
+				message = "Xóa dữ liệu thất bại";
+			}
+			out.println("<script type=\"text/javascript\">");
+			out.println("alert('" + message + "');");
+			out.println("</script>");
 
+			RequestDispatcher rd = request
+					.getRequestDispatcher("/ShowAdminAction");
+			rd.include(request, response);
+		} else if (action.equals("logout")) {
+			response.sendRedirect(request.getContextPath() + "/ShowLogin");
 		}
 	}
 

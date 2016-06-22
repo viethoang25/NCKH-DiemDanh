@@ -47,30 +47,16 @@ public class ProcessLogin extends HttpServlet {
 		} else {
 			HttpSession session = request.getSession();
 			if (account.getAuthorization().equals(Constants.ACCOUNT_ADMIN)) {
+				// Admin action
 				RequestDispatcher rd = request
 						.getRequestDispatcher("/ShowAdminAction");
 				rd.forward(request, response);
 			} else if (account.getAuthorization().equals(
 					Constants.ACCOUNT_TEACHER)) {
-				/*session.setAttribute("teacherid", account.getId());
-				List<Unit> listUnits = TeacherBO.getUnitsOfTeacher(account
-						.getId());
-				System.out.println("Teacher Id : " + account.getId());
-				System.out.println("Teacher units : " + listUnits.size());
-				request.setAttribute("listunits", listUnits);
-				RequestDispatcher rd = request
-						.getRequestDispatcher("/jsp/teacherUnits.jsp");
-				rd.forward(request, response);*/
+				// Teacher action
 			} else if (account.getAuthorization().equals(
 					Constants.ACCOUNT_STUDENT)) {
-				// If student
-				/*session.setAttribute("studentid", account.getId());
-				List<Unit> listUnits = UnitBO.getUnitsOfStudent(account
-						.getId());
-				request.setAttribute("listunits", listUnits);
-				RequestDispatcher rd = request
-						.getRequestDispatcher("/jsp/studentUnits.jsp");
-				rd.forward(request, response);*/
+				// Studetn action
 			}
 		}
 	}
