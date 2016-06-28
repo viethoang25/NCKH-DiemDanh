@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.io.*;
 
@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import manager.Constants;
 
@@ -28,7 +29,7 @@ public class ShowLogin extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
-		
+				
 		addServletPath();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");

@@ -11,6 +11,7 @@ public class Constants {
 	
 	public static final String FILE_NAME_COORDINATES_STUDENT = "coordinates_student.txt";
 	public static final String FILE_NAME_COORDINATES_SYSTEM = "coordinates_system.txt";
+	public static final String FILE_NAME_APPROVED = "approved";
 	
 	public static final String ACCOUNT_ADMIN = "0";
 	public static final String ACCOUNT_TEACHER = "1";

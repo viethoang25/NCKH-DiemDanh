@@ -27,7 +27,8 @@ public class CoordinateDAO {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(filePath));
-			String line = br.readLine();
+			String line;
+			//String line = br.readLine();
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				String[] item = line.split("\\|");
 				list.add(new Coordinate(item[0], Integer.parseInt(item[1]),
@@ -52,10 +53,11 @@ public class CoordinateDAO {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(filePath));
-			String line = br.readLine();
-			System.out.println(line);
-			line = br.readLine();
-			System.out.println(line);
+			String line;
+			//String line = br.readLine();
+			//System.out.println(line);
+			//line = br.readLine();
+			//System.out.println(line);
 			List<String> listId = new ArrayList<String>();
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				System.out.println(line);
@@ -68,8 +70,7 @@ public class CoordinateDAO {
 					listId.add(item[0]);
 					list.add(coor);
 				} else {
-					list.remove(index);
-					list.add(index, coor);
+					list.set(index, coor);
 				}
 			}
 		} catch (Exception e) {
@@ -117,9 +118,9 @@ public class CoordinateDAO {
 		BufferedWriter bw = null;
 		try {
 			bw = new BufferedWriter(new FileWriter(filePath, true));
-			bw.newLine();
 			bw.write(coor.getStudentId() + "|" + coor.getX1() + "|"
 					+ coor.getY1() + "|" + coor.getX2() + "|" + coor.getY2());
+			bw.newLine();
 			bw.flush();
 
 		} catch (IOException e) {

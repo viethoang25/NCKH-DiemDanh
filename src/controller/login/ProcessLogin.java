@@ -1,4 +1,4 @@
-package controller;
+package controller.login;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import manager.Constants;
 import model.bean.Account;
+import model.bean.Unit;
 import model.bo.AccountBO;
+import model.bo.TeacherBO;
 
 @WebServlet("/ProcessLogin")
 public class ProcessLogin extends HttpServlet {
@@ -42,7 +44,7 @@ public class ProcessLogin extends HttpServlet {
 		Account account = AccountBO.checkAccount(username, password);
 		if (account == null) {
 			request.setAttribute("message", "Tên đăng nhập hoặc mật khẩu không chính xác");
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/ShowLogin");
 			rd.include(request, response);
 		} else {
 			HttpSession session = request.getSession();
@@ -54,6 +56,10 @@ public class ProcessLogin extends HttpServlet {
 			} else if (account.getAuthorization().equals(
 					Constants.ACCOUNT_TEACHER)) {
 				// Teacher action
+				session.setAttribute("teacherid", account.getId());
+				RequestDispatcher rd = request
+						.getRequestDispatcher("/ShowTeacherUnits");
+				rd.forward(request, response);
 			} else if (account.getAuthorization().equals(
 					Constants.ACCOUNT_STUDENT)) {
 				// Studetn action

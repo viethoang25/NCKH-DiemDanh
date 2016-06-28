@@ -20,6 +20,7 @@ public class FileBO {
 	public static List<String> getImagesByUnit(String unitId) {
 		List<String> files = new ArrayList<String>();
 		String directory = Constants.DIRECTORY_UNITS + "/" + unitId;
+		System.out.println("FileBO : " + "Directory : " + directory);
 		listFiles(directory, files);
 		return files;
 	}
@@ -48,12 +49,13 @@ public class FileBO {
 		List<String> files = new ArrayList<String>();
 		List<String> images = getImagesByUnit(unitId);
 		for(String path : images){
-			System.out.println(path);
 			String[] items = path.split("\\\\");
 			System.out.println(items[0]);
 			String date = items[items.length - 3];
 			String time = items[items.length - 2];
-			if(DateManager.getHoursBetween(date + " " + time, dateTime) >= 24) {
+
+			path = path.replaceAll("\\\\", "/");
+			if(DateManager.getHoursBetween(date + " " + time, dateTime) >= 0) {
 				files.add(path);
 			}
 		}

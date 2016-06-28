@@ -74,4 +74,30 @@ public class UnitDAO {
 		}
 		return list;
 	}
+	
+	public List<Unit> getUnitsOfTeacher(String teacherId) {
+		List<Unit> list = new ArrayList<>();
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(
+					new FileReader(Constants.FILE_TEACHERS_LIST));
+			String line = br.readLine();
+			while ((line = br.readLine()) != null && line.length() > 0) {
+				String[] item = line.split("\\|");
+				if (item[0].equals(teacherId)) {
+					list.add(new Unit(item[2], item[3]));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		return list;
+	}
 }
