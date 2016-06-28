@@ -13,6 +13,10 @@
 </head>
 <body>
 
+	<%
+		String message = (String) request.getAttribute("message");  
+	%>
+	
 	<form method="post"
 		action="${ pageContext.request.contextPath}/ProcessUpload"
 		encType="multipart/form-data">
@@ -20,5 +24,12 @@
 		<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="start upload" />
 	</form>
 
+	<%
+		if(message != null) {	
+	%>
+		<p><font color=red size=5px><%=message%></font><p>
+	<%
+		}
+	%>
 </body>
 </html>

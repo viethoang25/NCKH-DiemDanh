@@ -22,7 +22,9 @@ a {
 	<%
 		String teacherId = (String) request.getSession().getAttribute("teacherid");
 		List<String> listImagePath = (List<String>) request.getAttribute("listimagepath");
+		String message = (String) request.getAttribute("message");
 		request.setAttribute("listimagepath", listImagePath);
+		request.setAttribute("message", message);
 	%>
 	
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">

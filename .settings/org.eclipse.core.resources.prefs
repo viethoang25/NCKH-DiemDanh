@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 encoding//src/controller/admin/ProcessAdminAction.java=UTF-8
 encoding//src/controller/login/ProcessLogin.java=UTF-8
+encoding//src/controller/teacher/ProcessUpload.java=UTF-8

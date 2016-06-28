@@ -60,9 +60,7 @@ public class ProcessAdminAction extends HttpServlet {
 				}
 			}
 
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('Ghi thông tin thành công');");
-			out.println("</script>");
+			request.setAttribute("message", "Tạo các file thành công");
 
 			RequestDispatcher rd = request
 					.getRequestDispatcher("/ShowAdminAction");
@@ -76,9 +74,7 @@ public class ProcessAdminAction extends HttpServlet {
 			} catch (Exception e) {
 				message = "Xóa dữ liệu thất bại";
 			}
-			out.println("<script type=\"text/javascript\">");
-			out.println("alert('" + message + "');");
-			out.println("</script>");
+			request.setAttribute("message", message);
 
 			RequestDispatcher rd = request
 					.getRequestDispatcher("/ShowAdminAction");

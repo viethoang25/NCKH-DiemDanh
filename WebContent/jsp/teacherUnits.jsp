@@ -51,7 +51,7 @@ a {
     			if (list != null) {
     				for (Unit unit : list) {
     		%>
-    			<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col">
+    			<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
     				<div class="mdl-card__title">
                			<h2 class="mdl-card__title-text"><%=unit.getName()%></h2>
             		</div>

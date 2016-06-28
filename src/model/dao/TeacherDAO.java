@@ -1,8 +1,10 @@
 package model.dao;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class TeacherDAO {
 		List<Teacher> list = new ArrayList<>();
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(
-					new FileReader(Constants.FILE_TEACHERS_LIST));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(
+					Constants.FILE_TEACHERS_LIST), "UTF-8"));
 			String line = br.readLine();
 			List<String> listId = new ArrayList<String>();
 			while ((line = br.readLine()) != null && line.length() > 0) {

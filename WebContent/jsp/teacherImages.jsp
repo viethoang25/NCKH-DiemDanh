@@ -32,7 +32,7 @@
 		if (list != null) {
 				for (String path : list) {
 	%>
-					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col"
+					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col"
 						style="background: url('../<%=request.getContextPath()%>/<%=path%>') center / cover;">
 						<div class="mdl-card__title mdl-card--expand"></div>
 						<form action="<%=request.getContextPath()%>/ProcessTeacherImages" method="POST">

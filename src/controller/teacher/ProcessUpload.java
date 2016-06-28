@@ -42,26 +42,29 @@ public class ProcessUpload extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
 
+		// Get Attribute
 		String unitId = (String) request.getSession().getAttribute("unitid");
 
-		Calendar calendar = Calendar.getInstance();
-		Date date = new Date();
-		calendar.setTime(date);
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		String d = dateFormat.format(date);
-		DateFormat timeFormat = new SimpleDateFormat("HH-mm-ss");
-		String t = timeFormat.format(date);
+		String message = "Upload thành công";
+		try {
+			Calendar calendar = Calendar.getInstance();
+			Date date = new Date();
+			calendar.setTime(date);
+			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String d = dateFormat.format(date);
+			DateFormat timeFormat = new SimpleDateFormat("HH-mm-ss");
+			String t = timeFormat.format(date);
 
-		String filepath = Constants.DIRECTORY_UNITS + "\\" + unitId + "\\" + d + "\\" + t;
-		File file = new File(filepath);
-		System.out.println("File create : " + file.getAbsolutePath());
-		if (!file.exists()) {
-			System.out.println(file.mkdirs());
-			System.out.println(file.isDirectory());
-		}
+			String filepath = Constants.DIRECTORY_UNITS + "\\" + unitId + "\\"
+					+ d + "\\" + t;
+			File file = new File(filepath);
+			System.out.println("File create : " + file.getAbsolutePath());
+			if (!file.exists()) {
+				System.out.println(file.mkdirs());
+				System.out.println(file.isDirectory());
+			}
 
-		if (ServletFileUpload.isMultipartContent(request)) {
-			try {
+			if (ServletFileUpload.isMultipartContent(request)) {
 				List<FileItem> multiparts = new ServletFileUpload(
 						new DiskFileItemFactory())
 						.parseRequest(new ServletRequestContext(request));
@@ -72,16 +75,26 @@ public class ProcessUpload extends HttpServlet {
 						item.write(new File(filepath + "\\" + name));
 					}
 				}
-				new File(filepath + "\\" + Constants.FILE_NAME_COORDINATES_STUDENT).createNewFile();
-				new File(filepath + "\\" + Constants.FILE_NAME_COORDINATES_SYSTEM).createNewFile();
-			} catch (Exception e) {
-				e.printStackTrace();
+				new File(filepath + "\\"
+						+ Constants.FILE_NAME_COORDINATES_STUDENT)
+						.createNewFile();
+				new File(filepath + "\\"
+						+ Constants.FILE_NAME_COORDINATES_SYSTEM)
+						.createNewFile();
+
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "Upload thất bại";
 		}
 
 		System.out.println("Upload unit id : " + unitId);
+
+		// Set Attribute
+		request.setAttribute("message", message);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/ShowTeacherAction");
+		RequestDispatcher rd = request
+				.getRequestDispatcher("/ShowTeacherAction");
 		rd.include(request, response);
 	}
 

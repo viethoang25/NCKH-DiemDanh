@@ -79,22 +79,29 @@ body{text-align: center;background: #f2f6f8;}
     	</main>
     </div>
 	<script>
-		function drawRectangle(x1, y1, x2, y2) {
+		function drawRectangle(id, x1, y1, x2, y2) {
   			var canvas = document.getElementById('canvas');
   			var context = canvas.getContext('2d');
 
   			context.beginPath();
+  			var width = x2 - x1;
+  			var height = y2 - y1;
   			context.rect(x1, y1, x2 - x1, y2 - y1);
   			context.lineWidth = 2;
   			context.strokeStyle = 'black';
   			context.stroke();
+
+  			context.font="15px Comic Sans MS";
+  			context.fillStyle = "white";
+  			context.textAlign = "left";
+  			context.fillText(id, x1,  y1);
 		}
 
 		'<%
 			List<Coordinate> list = (List<Coordinate>) request.getAttribute("listcoordinate");
 			for(Coordinate coor : list) {
 		%>'
-				document.getElementById('canvas').innerHTML = drawRectangle('<%=coor.getX1()%>', '<%=coor.getY1()%>', '<%=coor.getX2()%>', '<%=coor.getY2()%>');
+				document.getElementById('canvas').innerHTML = drawRectangle('<%=coor.getStudentId()%>', '<%=coor.getX1()%>', '<%=coor.getY1()%>', '<%=coor.getX2()%>', '<%=coor.getY2()%>');
 		'<%
 			}
 		%>'

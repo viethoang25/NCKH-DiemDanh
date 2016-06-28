@@ -10,11 +10,23 @@
 </head>
 <body>
 
+	<%
+		String message = (String) request.getAttribute("message");  
+	%>
+	
 	<form action="<%=request.getContextPath()%>/ProcessAdminAction" method="POST">
 		<button type="submit" name="action" class="btn btn-primary" value="create">Tạo các file</button>
 		<button type="submit" name="action" class="btn btn-primary" value="delete">Xóa</button>
 		<button type="submit" name="action" class="btn btn-primary" value="logout">Đăng xuất</button>
 	</form>
+	
+	<%
+		if(message != null) {	
+	%>
+		<p><font color=red size=5px><%=message%></font><p>
+	<%
+		}
+	%>
 
 
 </body>
