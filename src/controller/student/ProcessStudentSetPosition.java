@@ -1,6 +1,5 @@
-package controller.teacher;
+package controller.student;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -15,11 +14,11 @@ import manager.Constants;
 import model.bean.Coordinate;
 import model.bo.CoordinateBO;
 
-@WebServlet("/ProcessTeacherSetPosition")
-public class ProcessTeacherSetPosition extends HttpServlet {
+@WebServlet("/ProcessStudentSetPosition")
+public class ProcessStudentSetPosition extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ProcessTeacherSetPosition() {
+    public ProcessStudentSetPosition() {
         super();
     }
 
@@ -35,9 +34,9 @@ public class ProcessTeacherSetPosition extends HttpServlet {
 
 		// Get Attribute
 		String directory = (String) request.getSession().getAttribute("directory");
+		String studentId = (String) request.getSession().getAttribute("studentid");
 		
 		// Get Parameter
-		String studentId = request.getParameter("choosestudent");
 		int x1 = Integer.parseInt(request.getParameter("x1"));
 		int y1 = Integer.parseInt(request.getParameter("y1"));
 		int x2 = Integer.parseInt(request.getParameter("x2"));
@@ -59,7 +58,7 @@ public class ProcessTeacherSetPosition extends HttpServlet {
 			
 		// Go to ShowTeacherApprove
 		RequestDispatcher rd = request
-				.getRequestDispatcher("/ShowTeacherApprove");
+				.getRequestDispatcher("/ShowStudentApprove");
 		rd.forward(request, response);
 	}
 

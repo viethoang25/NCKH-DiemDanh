@@ -62,7 +62,11 @@ public class ProcessLogin extends HttpServlet {
 				rd.forward(request, response);
 			} else if (account.getAuthorization().equals(
 					Constants.ACCOUNT_STUDENT)) {
-				// Studetn action
+				// Student action
+				session.setAttribute("studentid", account.getId());
+				RequestDispatcher rd = request
+						.getRequestDispatcher("/ShowStudentUnits");
+				rd.forward(request, response);
 			}
 		}
 	}

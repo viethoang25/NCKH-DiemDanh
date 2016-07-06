@@ -91,7 +91,7 @@ public class CoordinateDAO {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(filePath));
-			String line = br.readLine();
+			String line;
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				String[] item = line.split("\\|");
 				if (item[0].equals(studentId)) {

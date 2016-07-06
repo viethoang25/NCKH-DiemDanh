@@ -80,6 +80,8 @@ public class ProcessTeacherApprove extends HttpServlet {
 				BufferedImage dst = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 				dst.getGraphics().drawImage(img, 0, 0, null);
 				ImageIO.write(dst, "jpg", new File(desPath));
+				dst.flush();
+				img.flush();
 			}
 			
 			// Open ShowTeacherUnits view
