@@ -25,6 +25,10 @@ a {
   font-size: 14px;
   font-weight: 500;
 }
+.image_grayscale{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
 </style>
 </head>
 <body>
@@ -33,6 +37,9 @@ a {
 	%>
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
+			<a class="mdl-layout-icon mdl-button mdl-js-button mdl-button--icon" href="<%=request.getContextPath()%>/ShowStudentUnits">
+				<i class="material-icons">arrow_back</i>
+  			</a> 
 			<div class="mdl-layout__header-row">
             	<!-- Title -->
             	<span class="mdl-layout-title">Danh sách hình ảnh</span>
@@ -55,9 +62,11 @@ a {
 			<div class="mdl-grid">
 			<%
 				List<String> list = (List<String>) request.getAttribute("listimagepath");
+				List<String> listDisable = (List<String>) request.getAttribute("listdisableimagepath");
 				if (list != null) {
 					for (String path : list) {
 			%>
+					<%if (!listDisable.contains(path)) { %>
 					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col"
 						style="background: url('../<%=request.getContextPath()%>/<%=path%>') center / cover;">
 						<div class="mdl-card__title mdl-card--expand"></div>
@@ -70,6 +79,15 @@ a {
 							</a>
 						</form>
 					</div>
+					<%} else { %>
+					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col image_grayscale"
+						style="background: url('../<%=request.getContextPath()%>/<%=path%>') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+  						<div class="mdl-card__actions">
+    							<span class="demo-card-image__filename"><%=path%></span>
+  						</div>
+					</div>
+					<%} %>
 			<%
 					}
 				}

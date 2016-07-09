@@ -53,9 +53,9 @@ public class ProcessStudentSetPosition extends HttpServlet {
 		}
 		Coordinate coor = new Coordinate(studentId, x1, y1, x2, y2);
 		
-		// Write data in Student coordinate
-		CoordinateBO.writeCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, coor);
-			
+		// Set Attribute
+		request.setAttribute("newcoor", coor);
+		
 		// Go to ShowTeacherApprove
 		RequestDispatcher rd = request
 				.getRequestDispatcher("/ShowStudentApprove");

@@ -45,7 +45,7 @@ public class FileBO {
 	
 
 
-	public static List<String> getImagesByUnitAndDate(String unitId, String dateTime) {
+	public static List<String> getImagesByUnitAndDateOfTeacher(String unitId, String dateTime) {
 		List<String> files = new ArrayList<String>();
 		List<String> images = getImagesByUnit(unitId);
 		for(String path : images){
@@ -55,11 +55,27 @@ public class FileBO {
 			String time = items[items.length - 2];
 
 			path = path.replaceAll("\\\\", "/");
-			if(DateManager.getHoursBetween(date + " " + time, dateTime) >= 0) {
+			if(DateManager.getHoursBetween(date + " " + time, dateTime) >= Constants.TIME_TO_APPROVE) {
 				files.add(path);
 			}
 		}
 		return files;
 	}
-	
+
+	public static List<String> getImagesByUnitAndDateOfStudent(String unitId, String dateTime) {
+		List<String> files = new ArrayList<String>();
+		List<String> images = getImagesByUnit(unitId);
+		for(String path : images){
+			String[] items = path.split("\\\\");
+			System.out.println(items[0]);
+			String date = items[items.length - 3];
+			String time = items[items.length - 2];
+
+			path = path.replaceAll("\\\\", "/");
+			if(DateManager.getHoursBetween(date + " " + time, dateTime) <= Constants.TIME_TO_APPROVE) {
+				files.add(path);
+			}
+		}
+		return files;
+	}
 }

@@ -39,18 +39,20 @@ public class ShowTeacherAction extends HttpServlet {
 		String unitId = (String) session.getAttribute("unitid");
 		
 		// Get list image path
-		List<String> listImagePath = FileBO.getImagesByUnitAndDate(unitId, DateManager.getCurrentDateTime());
-		List<String> list = new ArrayList<>();
+		List<String> listImagePath = FileBO.getImagesByUnitAndDateOfTeacher(unitId, DateManager.getCurrentDateTime());
+		List<String> listDisableImagePath = new ArrayList<>();
 		// Check if image is approved
 		for(String path : listImagePath) {
 			File temp = new File(path).getParentFile();
 			File directory = new File(getServletContext().getRealPath(temp.getPath()));
-			if(!new File(directory + "/" + Constants.FILE_NAME_APPROVED).exists()) {
-				list.add(path);
+			if(new File(directory + "/" + Constants.FILE_NAME_APPROVED).exists()) {
+				listDisableImagePath.add(path);
 			}
 		}
 		
-		request.setAttribute("listimagepath", list);
+		// Set Attribute
+		request.setAttribute("listimagepath", listImagePath);
+		request.setAttribute("listdisableimagepath", listDisableImagePath);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/teacherAction.jsp");
 		rd.forward(request, response);

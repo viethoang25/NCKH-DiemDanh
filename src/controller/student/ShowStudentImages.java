@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import manager.Constants;
 import manager.DateManager;
+import model.bo.CoordinateBO;
 import model.bo.FileBO;
 
 @WebServlet("/ShowStudentImages")
@@ -37,20 +38,25 @@ public class ShowStudentImages extends HttpServlet {
 		// Get Attribute
 		HttpSession session = request.getSession();
 		String unitId = (String) session.getAttribute("unitid");
+		String studentId = (String) session.getAttribute("studentid");
 		
 		// Get list image path
-		List<String> listImagePath = FileBO.getImagesByUnitAndDate(unitId, DateManager.getCurrentDateTime());
-		List<String> list = new ArrayList<>();
-		// Check if image is approved
+		List<String> listImagePath = FileBO.getImagesByUnitAndDateOfStudent(unitId, DateManager.getCurrentDateTime());
+		List<String> listDisableImagePath = new ArrayList<>();
+		
+		// Check if image is approved && time to approve < 3
 		for(String path : listImagePath) {
 			File temp = new File(path).getParentFile();
 			File directory = new File(getServletContext().getRealPath(temp.getPath()));
-			if(!new File(directory + "/" + Constants.FILE_NAME_APPROVED).exists()) {
-				list.add(path);
+			if(new File(directory + "/" + Constants.FILE_NAME_APPROVED).exists()
+					||	CoordinateBO.countStudentApproveTimes(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, studentId) >= Constants.MAX_TIMES_TO_APPROVE) {
+				listDisableImagePath.add(path);
 			}
 		}
 		
-		request.setAttribute("listimagepath", list);
+		// Set Attribute
+		request.setAttribute("listimagepath", listImagePath);
+		request.setAttribute("listdisableimagepath", listDisableImagePath);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/studentImages.jsp");
 		rd.forward(request, response);

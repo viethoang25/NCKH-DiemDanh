@@ -28,7 +28,7 @@ public class CoordinateDAO {
 		try {
 			br = new BufferedReader(new FileReader(filePath));
 			String line;
-			//String line = br.readLine();
+			// String line = br.readLine();
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				String[] item = line.split("\\|");
 				list.add(new Coordinate(item[0], Integer.parseInt(item[1]),
@@ -54,10 +54,10 @@ public class CoordinateDAO {
 		try {
 			br = new BufferedReader(new FileReader(filePath));
 			String line;
-			//String line = br.readLine();
-			//System.out.println(line);
-			//line = br.readLine();
-			//System.out.println(line);
+			// String line = br.readLine();
+			// System.out.println(line);
+			// line = br.readLine();
+			// System.out.println(line);
 			List<String> listId = new ArrayList<String>();
 			while ((line = br.readLine()) != null && line.length() > 0) {
 				System.out.println(line);
@@ -112,6 +112,31 @@ public class CoordinateDAO {
 				}
 		}
 		return coor;
+	}
+
+	public int countStudentApproveTimes(String filePath, String studentId) {
+		int count = 0;
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader(filePath));
+			String line;
+			while ((line = br.readLine()) != null && line.length() > 0) {
+				String[] item = line.split("\\|");
+				if (item[0].equals(studentId)) {
+					count++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		return count;
 	}
 
 	public void writeCoordinate(String filePath, Coordinate coor) {

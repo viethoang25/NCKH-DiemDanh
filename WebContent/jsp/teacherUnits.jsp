@@ -27,6 +27,9 @@ a {
 	
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
+			<a class="mdl-layout-icon mdl-button mdl-js-button mdl-button--icon" href="<%=request.getContextPath()%>/ShowTeacherUnits">
+				<i class="material-icons">arrow_back</i>
+  			</a>  
 			<div class="mdl-layout__header-row">
             	<!-- Title -->
             	<span class="mdl-layout-title">Danh sách học phần</span>

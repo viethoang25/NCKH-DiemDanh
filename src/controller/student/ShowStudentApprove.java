@@ -34,18 +34,19 @@ public class ShowStudentApprove extends HttpServlet {
 		// Get Attribute
 		String studentId = (String) request.getSession().getAttribute("studentid");
 		String directory = (String) request.getSession().getAttribute("directory");
+		Coordinate coor = (Coordinate) request.getAttribute("newcoor");
 		
 		// Get coordinate
-		Coordinate coor = null;
-		Coordinate sysCoor = CoordinateBO.getCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_SYSTEM, studentId);
-		Coordinate stuCoor = CoordinateBO.getCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, studentId);
+		if (coor == null) {
+			Coordinate sysCoor = CoordinateBO.getCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_SYSTEM, studentId);
+			Coordinate stuCoor = CoordinateBO.getCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, studentId);
 		
-		if(stuCoor != null) {
-			coor = stuCoor;
-		} else if (sysCoor != null){
-			coor = sysCoor;
+			if(stuCoor != null) {
+				coor = stuCoor;
+			} else if (sysCoor != null){
+				coor = sysCoor;
+			}
 		}
-		
 		// Set Attribute
 		request.getSession().setAttribute("coordinate", coor);
 		

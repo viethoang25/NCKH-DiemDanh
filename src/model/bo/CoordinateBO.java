@@ -22,4 +22,8 @@ public class CoordinateBO {
 	public static List<Coordinate> getAllCoordinateUnique(String filePath) {
 		return CoordinateDAO.getInstance().getAllCoordinateUnique(filePath);
 	}
+	
+	public static int countStudentApproveTimes(String filePath, String studentId) {
+		return CoordinateDAO.getInstance().countStudentApproveTimes(filePath, studentId);
+	}
 }

@@ -41,19 +41,24 @@ public class ProcessStudentApprove extends HttpServlet {
 		String imagePath = (String) request.getSession().getAttribute(
 						"imagepath");
 		String unitId = (String) request.getSession().getAttribute("unitid");
-		Coordinate coor = (Coordinate) request.getSession().getAttribute("coordinate");
-				
+		Coordinate coor = (Coordinate) request.getAttribute("newcoor");
+		if (coor == null) {
+			coor = (Coordinate) request.getSession().getAttribute("coordinate");
+		}
+		
 		// Get Parameter
 		String action = (String) request.getParameter("action");
 
 		if (action.equals("apply")) {
-			// Write data in Student coordinate
-			CoordinateBO.writeCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, coor);
+			if (coor != null) {
+				// Write data in Student coordinate
+				CoordinateBO.writeCoordinate(directory + "/" + Constants.FILE_NAME_COORDINATES_STUDENT, coor);
 			
-			// Open ShowStudentUnits view
-			RequestDispatcher rd = request
-								.getRequestDispatcher("/ShowStudentUnits");
-			rd.forward(request, response);
+				// Open ShowStudentUnits view
+				RequestDispatcher rd = request
+									.getRequestDispatcher("/ShowStudentUnits");
+				rd.forward(request, response);
+			}
 		} else if (action.equals("setposition")) {
 			RequestDispatcher rd = request.getRequestDispatcher("/ShowStudentSetPosition");
 			rd.forward(request, response);

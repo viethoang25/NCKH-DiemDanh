@@ -22,6 +22,10 @@
   font-size: 14px;
   font-weight: 500;
 }
+.image_grayscale{
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
 </style>
 </head>
 <body>
@@ -29,9 +33,11 @@
 	<div class="mdl-grid">
 	<%
 		List<String> list = (List<String>) request.getAttribute("listimagepath");
+		List<String> listDisable = (List<String>) request.getAttribute("listdisableimagepath");
 		if (list != null) {
 				for (String path : list) {
 	%>
+				<%if (!listDisable.contains(path)) { %>
 					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col"
 						style="background: url('../<%=request.getContextPath()%>/<%=path%>') center / cover;">
 						<div class="mdl-card__title mdl-card--expand"></div>
@@ -44,6 +50,15 @@
 							</a>
 						</form>
 					</div>
+				<%} else { %>
+					<div class="image-card mdl-card mdl-shadow--2dp mdl-cell mdl-cell--3-col image_grayscale"
+						style="background: url('../<%=request.getContextPath()%>/<%=path%>') center / cover;">
+						<div class="mdl-card__title mdl-card--expand"></div>
+  						<div class="mdl-card__actions">
+    							<span class="demo-card-image__filename"><%=path%></span>
+  						</div>
+					</div>
+				<%} %>
 	<%
 				}
 		}
