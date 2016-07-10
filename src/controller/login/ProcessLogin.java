@@ -48,6 +48,7 @@ public class ProcessLogin extends HttpServlet {
 			rd.include(request, response);
 		} else {
 			HttpSession session = request.getSession();
+			session.setAttribute("account", account);
 			if (account.getAuthorization().equals(Constants.ACCOUNT_ADMIN)) {
 				// Admin action
 				RequestDispatcher rd = request

@@ -77,4 +77,31 @@ public class StudentDAO {
 		}
 		return list;
 	}
+	
+	public Student getStudentById(String id) {
+		Student student = null;
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(
+					Constants.FILE_STUDENTS_LIST), "UTF-8"));
+			String line = br.readLine();
+			while ((line = br.readLine()) != null && line.length() > 0) {
+				String[] item = line.split("\\|");
+				if (item[0].equals(id)) {
+					student = new Student(item[0], item[1]);
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		return student;
+	}
 }

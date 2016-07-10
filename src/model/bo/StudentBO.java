@@ -20,4 +20,8 @@ public class StudentBO {
 	public static List<Student> getStudentsByUnit(String unitId) {
 		return StudentDAO.getInstance().getStudentsByUnit(unitId);
 	}
+	
+	public static Student getStudentById(String id) {
+		return StudentDAO.getInstance().getStudentById(id);
+	}
 }

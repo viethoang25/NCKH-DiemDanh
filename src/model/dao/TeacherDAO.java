@@ -52,4 +52,31 @@ public class TeacherDAO {
 		return list;
 	}
 	
+	public Teacher getTeacherById(String id) {
+		Teacher teacher = null;
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(
+					Constants.FILE_TEACHERS_LIST), "UTF-8"));
+			String line = br.readLine();
+			while ((line = br.readLine()) != null && line.length() > 0) {
+				String[] item = line.split("\\|");
+				if (item[0].equals(id)) {
+					teacher = new Teacher(item[0], item[1]);
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null)
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		return teacher;
+	}
 }
+

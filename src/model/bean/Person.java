@@ -1,12 +1,15 @@
 package model.bean;
 
-public class Student extends Person{
+public class Person {
 
-	public Student() {
-			
+	protected String id;
+	protected String name;
+	
+	public Person() { 
+		
 	}
 
-	public Student(String id, String name) {
+	public Person(String id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -27,5 +30,4 @@ public class Student extends Person{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }

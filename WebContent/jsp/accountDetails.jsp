@@ -1,3 +1,5 @@
+<%@page import="model.bean.Person"%>
+<%@page import="model.bean.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="model.bean.Unit"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,28 +23,23 @@ a {
 <body>
 
 	<%
-		String teacherId = (String) request.getSession().getAttribute("teacherid");
-		List<Unit> list = (List<Unit>) request.getAttribute("listunits");
+		Account account = (Account) request.getSession().getAttribute("account");
+		Person person = (Person) request.getAttribute("person");
 	%>
 	
 	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 		<header class="mdl-layout__header">
-			<a class="mdl-layout-icon mdl-button mdl-js-button mdl-button--icon" href="<%=request.getContextPath()%>/ShowTeacherUnits">
-				<i class="material-icons">arrow_back</i>
-  			</a>  
 			<div class="mdl-layout__header-row">
             	<!-- Title -->
-            	<span class="mdl-layout-title">Danh sách học phần</span>
+            	<span class="mdl-layout-title">Thông tin tài khoản</span>
             	<!-- Add spacer, to align navigation to the right -->
             	<div class="mdl-layout-spacer"></div>
-				<label class="mdl-checkbox__label"><%=teacherId %></label>
+				<label class="mdl-checkbox__label"><%=account.getId() %></label>
 				<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
 					<i class="material-icons">more_vert</i>
 				</button>
 				<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-					<a href="<%=request.getContextPath()%>/ProcessAccountDetails">
-						<li class="mdl-menu__item">Thông tin tài khoản</li>
-					</a>
+					<li class="mdl-menu__item">Thông tin tài khoản</li>
 					<a href="<%=request.getContextPath()%>/ProcessLogout">
 						<li class="mdl-menu__item">Đăng xuất</li>
 					</a>
@@ -52,29 +49,16 @@ a {
     
     	<main class="mdl-layout__content mdl-color--grey-200">
     		<div class="mdl-grid">
-    		<%
-    			if (list != null) {
-    				for (Unit unit : list) {
-    		%>
     			<div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col">
     				<div class="mdl-card__title">
-               			<h2 class="mdl-card__title-text"><%=unit.getName()%></h2>
+               			<h2 class="mdl-card__title-text"><%=person.getId()%></h2>
             		</div>
 					<div class="mdl-card__supporting-text">
-               			Mã học phần: <%=unit.getId()%>
-            		</div>
-					<div class="mdl-layout-spacer"></div>
-            		<div class="mdl-card__actions mdl-card--border">
-               			<form action="<%=request.getContextPath()%>/ProcessTeacherUnits" method="post">
-               				<button type="submit" name="action" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" value="apply">Chọn học phần</button>
-               				<input type="hidden" name="unitid" value="<%=unit.getId()%>"/> 
-               			</form>
+						Họ và tên : <%=person.getName()%><br>
+               			Username: <%=account.getUsername()%><br>
+               			Password: <%=account.getPassword() %><br>
             		</div>
          		</div>
-         	<%
-    				}
-    			}
-         	%>
 			</div>
 		</main>
    	</div>

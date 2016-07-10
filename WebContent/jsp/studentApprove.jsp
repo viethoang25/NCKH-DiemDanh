@@ -57,7 +57,9 @@ body{text-align: center;background: #f2f6f8;}
 					<i class="material-icons">more_vert</i>
 				</button>
 				<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-					<li class="mdl-menu__item">Thông tin tài khoản</li>
+					<a href="<%=request.getContextPath()%>/ProcessAccountDetails">
+						<li class="mdl-menu__item">Thông tin tài khoản</li>
+					</a>
 					<a href="<%=request.getContextPath()%>/ProcessLogout">
 						<li class="mdl-menu__item">Đăng xuất</li>
 					</a>
