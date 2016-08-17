@@ -31,5 +31,10 @@
 	<%
 		}
 	%>
+	
+	<form method="post" action="${pageContext.request.contextPath}/ProcessSync">
+		<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sync" />
+	</form>
+	
 </body>
 </html>

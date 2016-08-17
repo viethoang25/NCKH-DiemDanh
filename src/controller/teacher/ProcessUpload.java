@@ -21,6 +21,9 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
+import com.box.sdk.BoxFolder;
+
+import manager.BoxApi;
 import manager.Constants;
 
 @WebServlet("/ProcessUpload")
@@ -60,8 +63,8 @@ public class ProcessUpload extends HttpServlet {
 			File file = new File(filepath);
 			System.out.println("File create : " + file.getAbsolutePath());
 			if (!file.exists()) {
-				System.out.println(file.mkdirs());
-				System.out.println(file.isDirectory());
+				System.out.println("Make dir : " + file.mkdirs());
+				System.out.println("Is directory : " + file.isDirectory());
 			}
 
 			if (ServletFileUpload.isMultipartContent(request)) {
@@ -73,6 +76,8 @@ public class ProcessUpload extends HttpServlet {
 					if (!item.isFormField()) {
 						String name = new File(item.getName()).getName();
 						item.write(new File(filepath + "\\" + name));
+						System.out.println(filepath + "\\" + name);
+						uploadToBox(unitId, d, t, filepath + "\\" + name);
 					}
 				}
 				new File(filepath + "\\"
@@ -97,5 +102,19 @@ public class ProcessUpload extends HttpServlet {
 				.getRequestDispatcher("/ShowTeacherAction");
 		rd.include(request, response);
 	}
+	
+	private void uploadToBox(String unit, String date, String time, String path) {
+    	BoxApi api = BoxApi.getInstance();
+    	String unitFolderId = api.createFolder(api.getRootFolder(), unit).getID();
+		BoxFolder.Info folderInfo = api.createFolder(api.getBoxFolder(unitFolderId), date);
+		String dateFolderId = folderInfo.getID();
+		folderInfo = api.createFolder(api.getBoxFolder(dateFolderId), time);
+		String timeFolderId = folderInfo.getID();
+		try {
+			api.uploadFile(api.getBoxFolder(timeFolderId), path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
 }
