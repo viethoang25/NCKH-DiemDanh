@@ -9,7 +9,7 @@ import com.box.sdk.*;
 public class BoxApi {
 
 	private static BoxApi instance = null;
-	public static final String ACCESS_TOKEN = "vCAYKiMRU6aZ7lTl51jpK2sKtaNXiZjL";
+	public static final String ACCESS_TOKEN = "1t87X7JWLJ7XVT94mno7F0157n7lsBc3";
 	private BoxAPIConnection api;
 
 	private BoxApi() {
@@ -29,13 +29,17 @@ public class BoxApi {
 		stream.close();
 	}
 
-	public void downloadFile(String fileId) throws IOException {
+	public File downloadFile(String fileId, String filePath) throws IOException {
 		BoxFile file = new BoxFile(api, fileId);
 		BoxFile.Info info = file.getInfo();
 
-		FileOutputStream stream = new FileOutputStream(info.getName());
+		File f = new File(filePath);
+		f.getParentFile().mkdirs();
+		FileWriter writer = new FileWriter(f);
+		FileOutputStream stream = new FileOutputStream(f);
 		file.download(stream);
 		stream.close();
+		return f;
 	}
 
 	public void deleteFile(String fileId) {

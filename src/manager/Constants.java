@@ -17,6 +17,6 @@ public class Constants {
 	public static final String ACCOUNT_TEACHER = "1";
 	public static final String ACCOUNT_STUDENT = "2";
 	
-	public static final int TIME_TO_APPROVE = 1; //minute
+	public static final int TIME_TO_APPROVE = 0; //minute
 	public static final int MAX_TIMES_TO_APPROVE = 3; //times
 }
