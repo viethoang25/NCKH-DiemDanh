@@ -18,6 +18,8 @@
 		<button type="submit" name="action" class="btn btn-primary" value="create">Tạo các file</button>
 		<button type="submit" name="action" class="btn btn-primary" value="delete">Xóa</button>
 		<button type="submit" name="action" class="btn btn-primary" value="logout">Đăng xuất</button>
+		<p><input type="text" class="form-control" placeholder="Key" name="token-key"></p>
+		<button type="submit" name="action" class="btn btn-primary" value="apply">Xác nhận</button>
 	</form>
 	
 	<%

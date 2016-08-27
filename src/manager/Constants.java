@@ -8,6 +8,7 @@ public class Constants {
 	public static String FILE_ACCOUNT = "\\data\\account\\account.txt";
 	public static String DIRECTORY_UNITS = "\\data\\units";
 	public static String DIRECTORY_IMAGES= "\\data\\student_images";
+	public static String FILE_TOKEN_KEY = "\\data\\token_key.txt";
 	
 	public static final String FILE_NAME_COORDINATES_STUDENT = "coordinates_student.txt";
 	public static final String FILE_NAME_COORDINATES_SYSTEM = "coordinates_system.txt";
@@ -19,4 +20,5 @@ public class Constants {
 	
 	public static final int TIME_TO_APPROVE = 0; //minute
 	public static final int MAX_TIMES_TO_APPROVE = 3; //times
+	
 }

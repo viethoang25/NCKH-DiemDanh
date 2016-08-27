@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manager.BoxApi;
 import model.bean.Unit;
+import model.bo.AccountBO;
 import model.bo.TeacherBO;
 import model.bo.UnitBO;
 
@@ -31,6 +33,10 @@ public class ShowTeacherUnits extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
+		
+		// Set Access Token
+		BoxApi.ACCESS_TOKEN = AccountBO.getTokenKey();
+		System.out.println("Key : " + BoxApi.ACCESS_TOKEN);
 		
 		// Get Attribute
 		HttpSession session = request.getSession();

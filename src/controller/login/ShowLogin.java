@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manager.BoxApi;
 import manager.Constants;
+import model.bo.AccountBO;
 
 
 @WebServlet("/ShowLogin")
@@ -47,6 +49,7 @@ public class ShowLogin extends HttpServlet {
 			Constants.FILE_ACCOUNT = absolutePath + Constants.FILE_ACCOUNT;
 			Constants.DIRECTORY_UNITS = absolutePath + Constants.DIRECTORY_UNITS;
 			Constants.DIRECTORY_IMAGES = absolutePath + Constants.DIRECTORY_IMAGES;
+			Constants.FILE_TOKEN_KEY = absolutePath + Constants.FILE_TOKEN_KEY;
 		}
 	}
 }

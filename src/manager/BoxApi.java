@@ -9,7 +9,7 @@ import com.box.sdk.*;
 public class BoxApi {
 
 	private static BoxApi instance = null;
-	public static final String ACCESS_TOKEN = "1t87X7JWLJ7XVT94mno7F0157n7lsBc3";
+	public static String ACCESS_TOKEN = "1t87X7JWLJ7XVT94mno7F0157n7lsBc3";
 	private BoxAPIConnection api;
 
 	private BoxApi() {

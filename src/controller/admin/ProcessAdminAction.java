@@ -16,6 +16,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import manager.Constants;
 import model.bean.Student;
 import model.bean.Unit;
+import model.bo.AccountBO;
 import model.bo.StudentBO;
 import model.bo.UnitBO;
 
@@ -81,6 +82,12 @@ public class ProcessAdminAction extends HttpServlet {
 			rd.include(request, response);
 		} else if (action.equals("logout")) {
 			response.sendRedirect(request.getContextPath() + "/ShowLogin");
+		} else if (action.equals("apply")) {
+			String key = request.getParameter("token-key");
+			AccountBO.writeTokenKey(key);
+			RequestDispatcher rd = request
+					.getRequestDispatcher("/ShowAdminAction");
+			rd.include(request, response);
 		}
 	}
 
